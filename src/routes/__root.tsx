@@ -12,24 +12,32 @@ const activeProps = {
 function RootComponent() {
   return (
     <React.Fragment>
-      <h1>Root</h1>
-      <ul>
-        <li>
-          <Link to="/about" activeProps={activeProps}>
-            about
-          </Link>
-        </li>
-        <li>
-          <Link to="/profile" activeProps={activeProps}>
-            Profile
-          </Link>
-        </li>
-        <li>
-          <Link to="/pokemon/" activeProps={activeProps}>
-            Pokemon
-          </Link>
-        </li>
-      </ul>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "1rem",
+          padding: "1rem",
+          fontSize: "1.5rem",
+          textDecoration: "none",
+        }}
+      >
+        <Link to="/" activeProps={activeProps}>
+          Home
+        </Link>
+        <Link to="/posts" activeProps={activeProps}>
+          Post
+        </Link>
+        <Link
+          to="/layout-a"
+          activeProps={{
+            className: "font-bold",
+          }}
+        >
+          Layout
+        </Link>{" "}
+        <Link to="/profile">Profile</Link>
+      </div>
       <Outlet />
     </React.Fragment>
   );
