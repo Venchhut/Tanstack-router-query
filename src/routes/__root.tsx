@@ -16,7 +16,11 @@ function RootComponent() {
     <React.Fragment>
       <header className={classes.header}>
         <Container className={classes.inner}>
-          <Link to="/" activeProps={activeProps}>
+          <Link
+            to="/"
+            activeProps={activeProps}
+            style={{ backgroundColor: "blue", color: "white" }}
+          >
             Home
           </Link>
           <Link to="/posts" activeProps={activeProps}>

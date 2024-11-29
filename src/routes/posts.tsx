@@ -13,10 +13,6 @@ function PostComponent() {
       <ul className="gap-2">
         {[...posts].map((post) => {
           return (
-            // <div key={post.id}>
-            //   <h2>{post.title}</h2>
-            //   <p>{post.body}</p>
-            // </div>
             <li key={post.id} className="whitespace-nowrap">
               <Link
                 to="/posts/$postId"

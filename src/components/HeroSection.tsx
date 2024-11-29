@@ -1,5 +1,6 @@
 import { Button, Container, Overlay, Text, Title } from "@mantine/core";
 import style from "./HeroSection.module.css";
+import { Link } from "@tanstack/react-router";
 
 const HeroSection = () => {
   return (
@@ -20,6 +21,8 @@ const HeroSection = () => {
         </Text>
 
         <Button
+          component={Link}
+          to={"/posts"}
           variant="gradient"
           size="xl"
           radius="xl"
