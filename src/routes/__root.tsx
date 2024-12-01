@@ -29,6 +29,19 @@ function RootComponent() {
             Pokemon
           </Link>
         </li>
+        <li>
+          <Link
+            to="/search"
+            activeProps={activeProps}
+            search={{
+              query: "hello",
+              hasDiscount: true,
+              categories: ["electronics", "jewelery"],
+            }}
+          >
+            Search
+          </Link>
+        </li>
       </ul>
       <Outlet />
     </React.Fragment>
