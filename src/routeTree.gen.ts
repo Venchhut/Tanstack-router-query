@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SearchImport } from './routes/search'
 import { Route as ProfileImport } from './routes/profile'
+import { Route as FormImport } from './routes/form'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as PokemonIndexImport } from './routes/pokemon/index'
@@ -29,6 +30,12 @@ const SearchRoute = SearchImport.update({
 const ProfileRoute = ProfileImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FormRoute = FormImport.update({
+  id: '/form',
+  path: '/form',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/form': {
+      id: '/form'
+      path: '/form'
+      fullPath: '/form'
+      preLoaderRoute: typeof FormImport
+      parentRoute: typeof rootRoute
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -110,6 +124,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
   '/pokemon/$id': typeof PokemonIdRoute
@@ -119,6 +134,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
   '/pokemon/$id': typeof PokemonIdRoute
@@ -129,6 +145,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
   '/pokemon/$id': typeof PokemonIdRoute
@@ -140,16 +157,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/form'
     | '/profile'
     | '/search'
     | '/pokemon/$id'
     | '/pokemon'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/profile' | '/search' | '/pokemon/$id' | '/pokemon'
+  to:
+    | '/'
+    | '/about'
+    | '/form'
+    | '/profile'
+    | '/search'
+    | '/pokemon/$id'
+    | '/pokemon'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/form'
     | '/profile'
     | '/search'
     | '/pokemon/$id'
@@ -160,6 +186,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FormRoute: typeof FormRoute
   ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
   PokemonIdRoute: typeof PokemonIdRoute
@@ -169,6 +196,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FormRoute: FormRoute,
   ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
   PokemonIdRoute: PokemonIdRoute,
@@ -187,6 +215,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/form",
         "/profile",
         "/search",
         "/pokemon/$id",
@@ -198,6 +227,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/form": {
+      "filePath": "form.tsx"
     },
     "/profile": {
       "filePath": "profile.tsx"

@@ -42,6 +42,11 @@ function RootComponent() {
             Search
           </Link>
         </li>
+        <li>
+          <Link to="/form" activeProps={activeProps}>
+            Zod form
+          </Link>
+        </li>
       </ul>
       <Outlet />
     </React.Fragment>
