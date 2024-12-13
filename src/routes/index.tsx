@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import ShopProducts from "../components/SearchTest";
+import BudgetCard from "../components/BudgetCard";
+import RecentTransactions from "../components/Transition";
 
 const productSearchSchema = z.object({
   page: z.coerce.number().catch(1),
@@ -22,5 +24,11 @@ export const Route = createFileRoute("/")({
 
 // RouteComponent to display the ShopProducts component
 function RouteComponent() {
-  return <ShopProducts />;
+  return (
+    <>
+      <BudgetCard />
+      <ShopProducts />
+      <RecentTransactions />
+    </>
+  );
 }

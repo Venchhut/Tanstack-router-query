@@ -9,9 +9,11 @@ import {
   ActionIcon,
   Flex,
   Stack,
+  Skeleton,
 } from "@mantine/core";
 import { IconArrowDown, IconPlus, IconUsers } from "@tabler/icons-react";
 import { jobData } from "../../data/job";
+import { useEffect, useState } from "react";
 // Mock Data (from the image)
 
 interface Job {
@@ -49,11 +51,22 @@ const JobCard = ({ job }: { job: Job }) => {
           <Badge
             p={10}
             radius={"md"}
-            color={job.category === "Design" ? "green" : "blue"}
+            color={
+              job.category === "Design"
+                ? "green"
+                : job.category === "Development"
+                  ? "yellow"
+                  : "red"
+            }
           >
             {job.category}
           </Badge>
-          <Badge variant="default" p={10} radius={"md"}>
+          <Badge
+            variant="default"
+            p={10}
+            radius={"md"}
+            color={job.employmentType === "Full Time" ? "green" : "red"}
+          >
             {job.employmentType}
           </Badge>
           <Badge variant="default" p={10} radius={"md"}>
@@ -66,6 +79,15 @@ const JobCard = ({ job }: { job: Job }) => {
 };
 
 const JobListing = () => {
+  const [isloading, setIsloading] = useState(true);
+  const [jobs, setJobs] = useState<Job[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setJobs(jobData);
+      setIsloading(false);
+    }, 2000);
+  }, []);
   return (
     <Container size={"lg"}>
       <Group justify="space-between" pb={"xs"} pl={"md"} pr={"md"}>
@@ -94,9 +116,15 @@ const JobListing = () => {
       </Group>
 
       <SimpleGrid cols={{ base: 2, md: 3 }}>
-        {jobData.map((job) => (
-          <JobCard key={job.id} job={job} />
-        ))}
+        {isloading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <Card key={i} shadow="md" padding="lg" radius="md" withBorder>
+                <Skeleton height={10} radius="md" mb={10} />
+                <Skeleton height={30} radius="md" mb={10} />
+                <Skeleton height={20} radius="md" mt={10} />
+              </Card>
+            ))
+          : jobs.map((job) => <JobCard job={job} key={job.id} />)}
       </SimpleGrid>
     </Container>
   );
