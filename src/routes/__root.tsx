@@ -12,42 +12,49 @@ const activeProps = {
 function RootComponent() {
   return (
     <React.Fragment>
-      <h1>Root</h1>
-      <ul>
-        <li>
-          <Link to="/about" activeProps={activeProps}>
-            about
-          </Link>
-        </li>
-        <li>
-          <Link to="/profile" activeProps={activeProps}>
-            Profile
-          </Link>
-        </li>
-        <li>
-          <Link to="/pokemon/" activeProps={activeProps}>
-            Pokemon
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/search"
-            activeProps={activeProps}
-            search={{
-              query: "hello",
-              hasDiscount: true,
-              categories: ["electronics", "jewelery"],
-            }}
-          >
-            Search
-          </Link>
-        </li>
-        <li>
-          <Link to="/form" activeProps={activeProps}>
-            Zod form
-          </Link>
-        </li>
-      </ul>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <ul>
+          <li>
+            <Link to="/about" activeProps={activeProps}>
+              about
+            </Link>
+          </li>
+          <li>
+            <Link to="/profile" activeProps={activeProps}>
+              Profile
+            </Link>
+          </li>
+          <li>
+            <Link to="/pokemon/" activeProps={activeProps}>
+              Pokemon
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/search"
+              activeProps={activeProps}
+              search={{
+                query: "hello",
+                hasDiscount: true,
+                categories: ["electronics", "jewelery"],
+              }}
+            >
+              Search
+            </Link>
+          </li>
+          <li>
+            <Link to="/form" activeProps={activeProps}>
+              Zod form
+            </Link>
+          </li>
+        </ul>
+      </div>
       <Outlet />
     </React.Fragment>
   );

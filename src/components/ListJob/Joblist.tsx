@@ -30,7 +30,7 @@ const JobCard = ({ job }: { job: Job }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack justify="space-between" h="50%" gap={"xs"}>
-        <Text size="xs" color="dimmed">
+        <Text size="xs" c="dark">
           Active until: {job.activeUntil}
         </Text>
         <Group>
