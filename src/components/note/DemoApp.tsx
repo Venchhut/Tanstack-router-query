@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { getTodos, postTodo } from "../../api/note";
+import { deleteTodo, getTodos, postTodo } from "../../api/note";
 
 const DemoApp = () => {
   const [value, setValue] = useState("");
@@ -32,7 +32,12 @@ const DemoApp = () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
-
+  const deleteTodoMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
   return (
     <SimpleGrid>
       <Paper withBorder p="md">
@@ -62,6 +67,9 @@ const DemoApp = () => {
           {query.data?.map((todo) => (
             <List>
               <List.Item>{todo.title}</List.Item>
+              <Button onClick={() => deleteTodoMutation.mutate(todo)}>
+                Delete
+              </Button>
             </List>
           ))}
         </Stack>
