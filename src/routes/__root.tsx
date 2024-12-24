@@ -53,6 +53,9 @@ function RootComponent() {
               Zod form
             </Link>
           </li>
+          <li>
+            <Link to="/folder">Folder explorer</Link>
+          </li>
         </ul>
       </div>
       <Outlet />
