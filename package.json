@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
     "@tanstack/react-router": "^1.82.1",
     "@tanstack/router": "0.0.1-beta.53",
     "react": "^18.3.1",
