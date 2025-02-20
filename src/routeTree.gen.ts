@@ -11,16 +11,24 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TabImport } from './routes/tab'
 import { Route as SearchImport } from './routes/search'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as FormImport } from './routes/form'
 import { Route as FolderImport } from './routes/folder'
+import { Route as BreadcrumbsImport } from './routes/breadcrumbs'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as PokemonIndexImport } from './routes/pokemon/index'
 import { Route as PokemonIdImport } from './routes/pokemon/$id'
 
 // Create/Update Routes
+
+const TabRoute = TabImport.update({
+  id: '/tab',
+  path: '/tab',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const SearchRoute = SearchImport.update({
   id: '/search',
@@ -43,6 +51,12 @@ const FormRoute = FormImport.update({
 const FolderRoute = FolderImport.update({
   id: '/folder',
   path: '/folder',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BreadcrumbsRoute = BreadcrumbsImport.update({
+  id: '/breadcrumbs',
+  path: '/breadcrumbs',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/breadcrumbs': {
+      id: '/breadcrumbs'
+      path: '/breadcrumbs'
+      fullPath: '/breadcrumbs'
+      preLoaderRoute: typeof BreadcrumbsImport
+      parentRoute: typeof rootRoute
+    }
     '/folder': {
       id: '/folder'
       path: '/folder'
@@ -116,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
+    '/tab': {
+      id: '/tab'
+      path: '/tab'
+      fullPath: '/tab'
+      preLoaderRoute: typeof TabImport
+      parentRoute: typeof rootRoute
+    }
     '/pokemon/$id': {
       id: '/pokemon/$id'
       path: '/pokemon/$id'
@@ -138,10 +166,12 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/folder': typeof FolderRoute
   '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tab': typeof TabRoute
   '/pokemon/$id': typeof PokemonIdRoute
   '/pokemon': typeof PokemonIndexRoute
 }
@@ -149,10 +179,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/folder': typeof FolderRoute
   '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tab': typeof TabRoute
   '/pokemon/$id': typeof PokemonIdRoute
   '/pokemon': typeof PokemonIndexRoute
 }
@@ -161,10 +193,12 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/breadcrumbs': typeof BreadcrumbsRoute
   '/folder': typeof FolderRoute
   '/form': typeof FormRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/tab': typeof TabRoute
   '/pokemon/$id': typeof PokemonIdRoute
   '/pokemon/': typeof PokemonIndexRoute
 }
@@ -174,30 +208,36 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/breadcrumbs'
     | '/folder'
     | '/form'
     | '/profile'
     | '/search'
+    | '/tab'
     | '/pokemon/$id'
     | '/pokemon'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/breadcrumbs'
     | '/folder'
     | '/form'
     | '/profile'
     | '/search'
+    | '/tab'
     | '/pokemon/$id'
     | '/pokemon'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/breadcrumbs'
     | '/folder'
     | '/form'
     | '/profile'
     | '/search'
+    | '/tab'
     | '/pokemon/$id'
     | '/pokemon/'
   fileRoutesById: FileRoutesById
@@ -206,10 +246,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BreadcrumbsRoute: typeof BreadcrumbsRoute
   FolderRoute: typeof FolderRoute
   FormRoute: typeof FormRoute
   ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
+  TabRoute: typeof TabRoute
   PokemonIdRoute: typeof PokemonIdRoute
   PokemonIndexRoute: typeof PokemonIndexRoute
 }
@@ -217,10 +259,12 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BreadcrumbsRoute: BreadcrumbsRoute,
   FolderRoute: FolderRoute,
   FormRoute: FormRoute,
   ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
+  TabRoute: TabRoute,
   PokemonIdRoute: PokemonIdRoute,
   PokemonIndexRoute: PokemonIndexRoute,
 }
@@ -237,10 +281,12 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/breadcrumbs",
         "/folder",
         "/form",
         "/profile",
         "/search",
+        "/tab",
         "/pokemon/$id",
         "/pokemon/"
       ]
@@ -250,6 +296,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/breadcrumbs": {
+      "filePath": "breadcrumbs.tsx"
     },
     "/folder": {
       "filePath": "folder.tsx"
@@ -262,6 +311,9 @@ export const routeTree = rootRoute
     },
     "/search": {
       "filePath": "search.tsx"
+    },
+    "/tab": {
+      "filePath": "tab.tsx"
     },
     "/pokemon/$id": {
       "filePath": "pokemon/$id.tsx"

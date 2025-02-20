@@ -54,7 +54,7 @@ function RootComponent() {
             </Link>
           </li>
           <li>
-            <Link to="/folder">Folder explorer</Link>
+            <Link to="/folder">Breadcrumb</Link>
           </li>
         </ul>
       </div>
